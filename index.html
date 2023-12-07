@@ -71,7 +71,7 @@
 
 <style type="text/css">
 
-* { box-sizing: border-box; } body {margin: 0;}.hamburger1{display:none;}.bar1{display:block;width:25px;height:3px;margin:5px auto;-webkit-transition:all 0.3s ease-in-out;transition:all 0.3s ease-in-out;background-color:#101010;}@media only screen and (max-width: 992px){.hamburger1{display:block;cursor:pointer;}.hamburger1.active .bar1:nth-child(2){opacity:0;}.hamburger1.active .bar1:nth-child(1){transform:translateY(8px) rotate(45deg);}.hamburger1.active .bar1:nth-child(3){transform:translateY(-8px) rotate(-45deg);}}
+* { box-sizing: border-box; } body {margin: 0;}.swiper{height:80vh;}.swiper-slide{height:80vh !important;}
 
 </style>
 
@@ -79,45 +79,100 @@
 		<html>
  <head></head>
  <body id="izrh" class="bg-secondary">
-  <div></div>
-  <div id="idrg"></div>
-  <div id="ik2v">
-   <nav class="navbar bg-white navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-     <a href="#" class="navbar-brand">Shopiana</a>
-     <div class="hamburger1">
-      <span class="bar1"></span><span class="bar1"></span><span class="bar1"></span>
+  <div id="ikbl">
+   <div class="swiper w-100 mySwiper">
+    <div class="swiper-wrapper">
+     <div class="swiper-slide">
+      <img src="https://dkcut7rvj02cb.cloudfront.net/files/hp23092502/ASSET/pexels-photo-733860.jpeg" alt="swiper-image" id="i2ii" class="swiper-image w-100 h-100">
      </div>
-     <div id="collapseId" class="collapse navbar-collapse">
-      <div class="navbar-nav">
-       <a href="#" class="nav-item nav-link active">Home</a><a href="#" class="nav-item nav-link">Profile</a>
-       <div class="nav-item dropdown">
-        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle">Messages</a>
-        <div class="dropdown-menu">
-         <a href="#" class="dropdown-item">Inbox</a><a href="#" class="dropdown-item">Sent</a><a href="#" class="dropdown-item">Drafts</a>
-        </div>
-       </div><a href="#" class="nav-item nav-link">About</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-       <a href="#" class="nav-item nav-link">Login</a>
-      </div>
+     <div class="swiper-slide">
+      <img src="https://dkcut7rvj02cb.cloudfront.net/files/hp23092502/ASSET/pexels-photo-533961.jpeg" alt="swiper-image" id="ieuv3" class="swiper-image w-100 h-100">
+     </div>
+     <div class="swiper-slide">
+      <img src="https://dkcut7rvj02cb.cloudfront.net/files/hp23092502/ASSET/pexels-photo-2548531.jpeg" alt="swiper-image" id="inf0i" class="swiper-image w-100 h-100">
      </div>
     </div>
-   </nav>
+    <div class="swiper-button-next" id="iwp13"></div>
+    <div class="swiper-button-prev" id="i9y0r"></div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-scrollbar"></div>
+   </div>
   </div>
-  <script>var items = document.querySelectorAll('#ik2v');
-          for (var i = 0, len = items.length; i < len; i++) {
-            (function(){
-const hamburger = this.querySelectorAll(".hamburger1");
-        const navMenu = this.querySelectorAll(".navbar-collapse");
-        for (let i = 0; i < hamburger.length; i++) {
-            hamburger[i].addEventListener("click", function () {
-                hamburger[i].classList.toggle("active");
-                navMenu[i].classList.toggle("show");
+  <script>var props = {"ikbl":{"autoplay":false,"loop":false,"scrollbar":{"enabled":false},"navigation":{"nextEl":".swiper-button-next","prevEl":".swiper-button-prev"},"direction":"horizontal","paginationType":"bullets","initialSlide":1,"speed":300,"dynamicBullets":false,"clickable":false,"effect":"slide"}};
+          var ids = Object.keys(props).map(function(id) { return '#'+id }).join(',');
+          var els = document.querySelectorAll(ids);
+          for (var i = 0, len = els.length; i < len; i++) {
+            var el = els[i];
+            (function script({ autoplay, loop, scrollbar, navigation, direction, paginationType, initialSlide, dynamicBullets, clickable, effect }) {
+        // Check if Swiper CSS is already added
+        if (!document.querySelector('link[href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"]')) {
+            // Dynamically add Swiper CSS to the head element
+            const swiperCssLink = document.createElement('link');
+            swiperCssLink.rel = 'stylesheet';
+            swiperCssLink.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+            document.head.appendChild(swiperCssLink);
+        }
+        // Check if Swiper JS is already added
+        if (!document.querySelector('script[src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"]')) {
+            // Dynamically add Swiper JS to the head element
+            const swiperJsScript = document.createElement('script');
+            swiperJsScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+            document.head.appendChild(swiperJsScript);
+            // Wait for the Swiper JS to be loaded before initializing
+            swiperJsScript.onload = function () {
+                // Swiper initializing
+                //@ts-ignore
+                const swiper = new Swiper(".mySwiper", {
+                    spaceBetween: 30,
+                    loop,
+                    autoplay,
+                    scrollbar,
+                    navigation,
+                    direction,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        type: paginationType,
+                        dynamicBullets,
+                        clickable,
+                    },
+                    initialSlide: initialSlide - 1,
+                    effect,
+                    observer: true,
+                });
+                // Update swiper on any change
+                swiper && swiper.on('observerUpdate', function () {
+                    swiper.update();
+                    swiper.updateSlides();
+                });
+            };
+        }
+        else {
+            // Swiper JS is already added, directly initialize Swiper
+            //@ts-ignore
+            const swiper = new Swiper(".mySwiper", {
+                spaceBetween: 30,
+                loop,
+                autoplay,
+                scrollbar,
+                navigation,
+                direction,
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: paginationType,
+                    dynamicBullets,
+                    clickable,
+                },
+                initialSlide: initialSlide - 1,
+                effect,
+                observer: true,
+            });
+            // Update swiper on any change
+            swiper && swiper.on('observerUpdate', function () {
+                swiper.update();
+                swiper.updateSlides();
             });
         }
-        ;
-}.bind(items[i]))();
+    }.bind(el))(props[el.id]);
           }</script>
  </body>
 </html>
